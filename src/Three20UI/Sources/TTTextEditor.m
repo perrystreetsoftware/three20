@@ -241,6 +241,8 @@ static const CGFloat kUITextViewVerticalPadding = 6;
   if (_autoresizesToText) {
     [self constrainToText];
   }
+  // es added
+  if (insertReturn) _textView.text = _textField.text;
 }
 
 
