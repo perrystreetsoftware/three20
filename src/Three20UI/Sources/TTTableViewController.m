@@ -427,7 +427,7 @@ static const CGFloat kBannerViewHeight = 22;
       ? [_dataSource titleForLoading:NO]
       : [self defaultTitleForLoading];
       if (title.length) {
-        TTActivityLabel* label = [[[TTActivityLabel alloc] initWithStyle:TTActivityLabelStyleWhiteBox]
+        TTActivityLabel* label = [[[TTActivityLabel alloc] initWithStyle:TTActivityLabelStyleAllWhite]
                                   autorelease];
         label.text = title;
         label.backgroundColor = _tableView.backgroundColor;

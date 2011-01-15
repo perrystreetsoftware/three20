@@ -70,6 +70,9 @@ static CGFloat kProgressMargin  = 6;
     } else if (_style == TTActivityLabelStyleWhiteBox) {
       _bezelView.backgroundColor = [UIColor clearColor];
       self.backgroundColor = [UIColor whiteColor];
+    } else if (_style == TTActivityLabelStyleAllWhite) {
+		_bezelView.backgroundColor = [UIColor clearColor];
+		self.backgroundColor = [UIColor whiteColor];
     } else if (_style == TTActivityLabelStyleBlackBox) {
       _bezelView.backgroundColor = [UIColor clearColor];
       self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
@@ -103,6 +106,11 @@ static CGFloat kProgressMargin  = 6;
                                                             UIActivityIndicatorViewStyleGray];
       _label.font = TTSTYLEVAR(activityLabelFont);
       _label.textColor = TTSTYLEVAR(tableActivityTextColor);
+    } else if (_style == TTActivityLabelStyleAllWhite) {
+		_activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
+							  UIActivityIndicatorViewStyleWhite];
+		_label.font = TTSTYLEVAR(activityLabelFont);
+		_label.textColor = TTSTYLEVAR(tableActivityTextColor);
     } else if (_style == TTActivityLabelStyleBlackBezel || _style == TTActivityLabelStyleBlackBox) {
       _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
                                                             UIActivityIndicatorViewStyleWhiteLarge];
