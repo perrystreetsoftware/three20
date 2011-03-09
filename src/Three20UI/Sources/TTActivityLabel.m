@@ -111,6 +111,11 @@ static CGFloat kProgressMargin  = 6;
 							  UIActivityIndicatorViewStyleWhite];
 		_label.font = TTSTYLEVAR(activityLabelFont);
 		_label.textColor = TTSTYLEVAR(tableActivityTextColor);
+    } else if (_style == TTActivityLabelStyleBlackOnWhite) {
+		_activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
+							  UIActivityIndicatorViewStyleGray];
+		_label.font = TTSTYLEVAR(activityLabelFont);
+		_label.textColor = [UIColor blackColor];
     } else if (_style == TTActivityLabelStyleBlackBezel || _style == TTActivityLabelStyleBlackBox) {
       _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
                                                             UIActivityIndicatorViewStyleWhiteLarge];

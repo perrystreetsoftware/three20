@@ -25,7 +25,8 @@ typedef enum {
   TTActivityLabelStyleBlackBanner,
   TTActivityLabelStyleWhiteBezel,
   TTActivityLabelStyleWhiteBox,
-  TTActivityLabelStyleAllWhite	
+  TTActivityLabelStyleAllWhite,
+  TTActivityLabelStyleBlackOnWhite
 } TTActivityLabelStyle;
 
 @class TTView;
