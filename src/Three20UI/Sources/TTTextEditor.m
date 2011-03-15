@@ -38,7 +38,7 @@ static const CGFloat kPaddingY = 9;
 // with 15pt normal helvetica.  If you change this number at all, UITextView may wrap the text
 // before or after the TTTextEditor expands or contracts its height to match.  Obviously,
 // hard-coding this value here sucks, and I need to implement a solution that works for any font.
-static const CGFloat kTextViewInset = 33;
+static const CGFloat kTextViewInset = 33; // es changed from 31 to 33
 
 static const CGFloat kUITextViewVerticalPadding = 6;
 
@@ -183,6 +183,12 @@ static const CGFloat kUITextViewVerticalPadding = 6;
   CGFloat newHeight = [self heightThatFits:&_overflowed numberOfLines:&numberOfLines];
   CGFloat diff = newHeight - oldHeight;
 
+	// es added - correct for fuckedup content offset
+	if (numberOfLines > 1 && numberOfLines <= 5 && _textView.contentOffset.y != 6)
+		_textView.contentOffset = CGPointMake(0,6);
+	if (numberOfLines == 6 && _textView.contentOffset.y == 6)
+		_textView.contentOffset = CGPointMake(0,25);
+	
   if (numberOfLines > 1 && !_textField.hidden) {
     [self createTextView];
     _textField.hidden = YES;
