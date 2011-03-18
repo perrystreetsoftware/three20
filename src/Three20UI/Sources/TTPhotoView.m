@@ -125,11 +125,16 @@
 #pragma mark UIImageView
 
 
+// es added
+- (UIViewContentMode)defaultImageContentMode {
+	return UIViewContentModeCenter;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)setImage:(UIImage*)image {
   if (image != _defaultImage || !_photo || self.urlPath != [_photo URLForVersion:TTPhotoVersionLarge]) {
     if (image == _defaultImage) {
-      self.contentMode = UIViewContentModeCenter;
+      self.contentMode = [self defaultImageContentMode];
 
     } else {
       self.contentMode = UIViewContentModeScaleAspectFill;
@@ -342,6 +347,5 @@
 
   _statusLabel.text = text;
 }
-
 
 @end
