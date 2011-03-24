@@ -24,6 +24,7 @@
 // Style
 #import "Three20Style/TTGlobalStyle.h"
 #import "Three20Style/TTDefaultStyleSheet.h"
+#import "Three20Style/UIFontAdditions.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,11 +97,16 @@
     self.detailTextLabel.left = self.detailTextLabel.top*2;
 
   } else {
-    [self.detailTextLabel sizeToFit];
-    self.detailTextLabel.left = kTableCellHPadding;
-    self.detailTextLabel.top = kTableCellVPadding;
-
-    CGFloat maxWidth = self.contentView.width - kTableCellHPadding*2;
+	CGFloat maxWidth = self.contentView.width - kTableCellHPadding*2;
+	CGSize detailSize = [self.detailTextLabel.text 
+						   sizeWithFont:self.detailTextLabel.font
+						   constrainedToSize:CGSizeMake(maxWidth, CGFLOAT_MAX)
+						   lineBreakMode:self.detailTextLabel.lineBreakMode];
+	
+	CGFloat lines = detailSize.height / TTSTYLEVAR(tableFont).ttLineHeight;
+	self.detailTextLabel.numberOfLines = lines;
+	self.detailTextLabel.frame = CGRectMake(kTableCellHPadding, kTableCellVPadding,
+											detailSize.width, detailSize.height);
     CGSize captionSize =
     [self.textLabel.text sizeWithFont:self.textLabel.font
                     constrainedToSize:CGSizeMake(maxWidth, CGFLOAT_MAX)
