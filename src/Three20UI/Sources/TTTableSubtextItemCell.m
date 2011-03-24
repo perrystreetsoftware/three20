@@ -19,6 +19,7 @@
 // UI
 #import "Three20UI/TTTableCaptionItem.h"
 #import "Three20UI/UIViewAdditions.h"
+#import "Three20UI/UITableViewAdditions.h"
 
 // Style
 #import "Three20Style/TTGlobalStyle.h"
@@ -62,8 +63,9 @@
 + (CGFloat)tableView:(UITableView*)tableView rowHeightForObject:(id)object {
   TTTableCaptionItem* item = object;
 
-  CGFloat width = tableView.width - kTableCellHPadding*2;
-
+  CGFloat margin = [tableView tableCellMargin];
+  CGFloat width = tableView.width - kTableCellHPadding*2 - margin*2;
+	
   CGSize detailTextSize = [item.text sizeWithFont:TTSTYLEVAR(tableFont)
                                 constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)
                                     lineBreakMode:UILineBreakModeTailTruncation];
