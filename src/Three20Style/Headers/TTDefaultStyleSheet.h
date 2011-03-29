@@ -86,6 +86,9 @@
 
 @property (nonatomic, readonly) UITableViewCellSelectionStyle tableSelectionStyle;
 
+// es added
+@property (nonatomic, readonly) UIActivityIndicatorViewStyle loadingActivityIndicatorStyle;
+
 - (TTStyle*)selectionFillStyle:(TTStyle*)next;
 
 - (TTStyle*)toolbarButtonForState:(UIControlState)state shape:(TTShape*)shape

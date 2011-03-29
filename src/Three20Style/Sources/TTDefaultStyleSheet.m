@@ -1106,6 +1106,10 @@
     [TTSolidFillStyle styleWithColor:color next:nil]]];
 }
 
+// es added
+- (UIActivityIndicatorViewStyle) loadingActivityIndicatorStyle {
+	return UIActivityIndicatorViewStyleGray;
+}
 
 @end
 
