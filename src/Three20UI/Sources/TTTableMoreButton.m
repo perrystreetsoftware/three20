@@ -33,5 +33,9 @@
   [super dealloc];
 }
 
+- (void) setIsLoading:(BOOL)b
+{
+	_isLoading = b;
+}
 
 @end
