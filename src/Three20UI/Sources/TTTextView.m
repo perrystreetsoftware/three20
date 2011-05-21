@@ -39,9 +39,13 @@
 
     } else {
       // If there is an overflow, we force the text view to keep the cursor at the bottom of the
-      // view.
-      [super setContentOffset: CGPointMake(offset.x, self.contentSize.height - self.height)
-                     animated: animated];
+      // view but only if we are already at bottom. Otherwise it becomes IMPOSSIBLE to scroll back
+	  // to the top
+		if (offset.y + self.height >= self.contentSize.height)
+		  [super setContentOffset: CGPointMake(offset.x, self.contentSize.height - self.height)
+						 animated: animated];
+		else
+		  [super setContentOffset:offset animated:animated];
     }
 
   } else {
