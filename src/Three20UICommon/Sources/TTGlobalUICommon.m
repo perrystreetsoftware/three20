@@ -29,6 +29,8 @@ const CGFloat ttkDefaultLandscapeToolbarHeight  = 33;
 
 const CGFloat ttkDefaultPortraitKeyboardHeight  = 216;
 const CGFloat ttkDefaultLandscapeKeyboardHeight = 160;
+const CGFloat ttkDefaultPadPortraitKeyboardHeight   = 264;
+const CGFloat ttkDefaultPadLandscapeKeyboardHeight  = 352;
 
 const CGFloat ttkGroupedTableCellInset = 10.0;
 
@@ -160,11 +162,14 @@ CGFloat TTToolbarHeightForOrientation(UIInterfaceOrientation orientation) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 CGFloat TTKeyboardHeightForOrientation(UIInterfaceOrientation orientation) {
-  if (UIInterfaceOrientationIsPortrait(orientation)) {
-    return TT_KEYBOARD_HEIGHT;
-  } else {
-    return TT_LANDSCAPE_KEYBOARD_HEIGHT;
-  }
+	if (TTIsPad()) {
+		return UIInterfaceOrientationIsPortrait(orientation) ? TT_IPAD_KEYBOARD_HEIGHT
+		: TT_IPAD_LANDSCAPE_KEYBOARD_HEIGHT;
+		
+	} else {
+		return UIInterfaceOrientationIsPortrait(orientation) ? TT_KEYBOARD_HEIGHT
+		: TT_LANDSCAPE_KEYBOARD_HEIGHT;
+	}
 }
 
 

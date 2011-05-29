@@ -160,6 +160,8 @@ extern const CGFloat ttkGroupedTableCellInset;
 
 #define TT_KEYBOARD_HEIGHT            ttkDefaultPortraitKeyboardHeight
 #define TT_LANDSCAPE_KEYBOARD_HEIGHT  ttkDefaultLandscapeKeyboardHeight
+#define TT_IPAD_KEYBOARD_HEIGHT            ttkDefaultPadPortraitKeyboardHeight
+#define TT_IPAD_LANDSCAPE_KEYBOARD_HEIGHT  ttkDefaultPadLandscapeKeyboardHeight
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Animation
