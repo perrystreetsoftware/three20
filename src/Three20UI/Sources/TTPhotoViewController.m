@@ -229,6 +229,7 @@ static const NSInteger kActivityLabelTag          = 96;
     _toolbar.height = TT_LANDSCAPE_TOOLBAR_HEIGHT+1;
   }
   _toolbar.top = self.view.height - _toolbar.height;
+	_scrollView.bottom = _toolbar.top; /* es added */
 }
 
 
