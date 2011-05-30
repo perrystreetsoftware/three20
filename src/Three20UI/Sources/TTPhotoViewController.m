@@ -223,13 +223,22 @@ static const NSInteger kActivityLabelTag          = 96;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)updateToolbarWithOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	
+	CGFloat oldHeight = _toolbar.height;
   if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) {
     _toolbar.height = TT_TOOLBAR_HEIGHT;
   } else {
     _toolbar.height = TT_LANDSCAPE_TOOLBAR_HEIGHT+1;
   }
+	
   _toolbar.top = self.view.height - _toolbar.height;
-	_scrollView.bottom = _toolbar.top; /* es added */
+
+	// es added
+	CGFloat heightChange = _toolbar.height - oldHeight;
+	
+	CGRect oldScrollFrame = _scrollView.frame;
+	_scrollView.frame = CGRectMake(oldScrollFrame.origin.x, oldScrollFrame.origin.y, oldScrollFrame.size.width,
+								   oldScrollFrame.size.height - heightChange);
 }
 
 
