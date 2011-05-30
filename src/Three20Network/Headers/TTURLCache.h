@@ -169,6 +169,11 @@
 - (void)storeImage:(UIImage*)image forURL:(NSString*)URL;
 
 /**
+ * esilver added: expose the force method of storeImage
+ */
+- (void)storeImage:(UIImage*)image forURL:(NSString*)URL force:(BOOL)force;
+
+/**
  * Stores an etag value in the etag cache.
  */
 - (void)storeEtag:(NSString*)etag forKey:(NSString*)key;
