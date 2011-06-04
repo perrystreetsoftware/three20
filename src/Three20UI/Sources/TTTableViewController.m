@@ -420,6 +420,10 @@ static const CGFloat kBannerViewHeight = 22;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (TTActivityLabelStyle) loadingStyle {
+	return TTActivityLabelStyleAllWhite;
+}
+
 - (void)showLoading:(BOOL)show {
   if (show) {
     if (!self.model.isLoaded || ![self canShowModel]) {
@@ -427,7 +431,7 @@ static const CGFloat kBannerViewHeight = 22;
       ? [_dataSource titleForLoading:NO]
       : [self defaultTitleForLoading];
       if (title.length) {
-        TTActivityLabel* label = [[[TTActivityLabel alloc] initWithStyle:TTActivityLabelStyleAllWhite]
+        TTActivityLabel* label = [[[TTActivityLabel alloc] initWithStyle:[self loadingStyle]]
                                   autorelease];
         label.text = title;
         label.backgroundColor = _tableView.backgroundColor;

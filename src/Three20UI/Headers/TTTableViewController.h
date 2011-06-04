@@ -16,6 +16,7 @@
 
 // UI
 #import "Three20UI/TTModelViewController.h"
+#import "Three20UI/TTActivityLabel.h"
 
 @protocol TTTableViewDataSource;
 @class TTActivityLabel;
@@ -87,6 +88,9 @@
  * empty cells for the remaining space. This causes the bottom shadow to appear out of place.
  */
 @property (nonatomic) BOOL showTableShadows;
+
+// esilver added
+@property (nonatomic, readonly) TTActivityLabelStyle loadingStyle;
 
 /**
  * Initializes and returns a controller having the given style.
