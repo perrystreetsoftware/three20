@@ -658,7 +658,9 @@ static NSMutableDictionary* gNamedCaches = nil;
 // esilver added. Because iterating the filesystem takes a long time, 
 // we added concept of max runtime of this method, assuming 
 // that it's successful completion is not super-important
-- (void) removeFilesOlderThan:(NSDate*)oldestDate maxRuntime:(NSTimeInterval)maxRuntime
+- (void) removeFilesOlderThan:(NSDate*)oldestDate 
+				   maxRuntime:(NSTimeInterval)maxRuntime
+				  inOperation:(NSOperation*)operation
 {	
 	
 	NSDate *start = [NSDate date];
@@ -668,16 +670,22 @@ static NSMutableDictionary* gNamedCaches = nil;
 							contentsOfDirectoryAtPath:_cachePath error:&error];
 	for (NSString *fileName in dirContents)
 	{
+		if (operation.isCancelled) return;
 		NSString* filePath = [_cachePath stringByAppendingPathComponent:fileName];
+		if (operation.isCancelled) return;
 		NSDictionary* attrs = [fm attributesOfItemAtPath:filePath error:nil];
+		if (operation.isCancelled) return;
 		NSDate* modified = [attrs objectForKey:NSFileModificationDate];
+		if (operation.isCancelled) return;
 		if ([oldestDate timeIntervalSinceDate:modified] > 0) {
 			[fm removeItemAtPath:filePath error:nil];
 		}
 		
+		if (operation.isCancelled) return;
 		NSTimeInterval currentRuntime = [[NSDate date] timeIntervalSinceDate:start];
 		if (currentRuntime > maxRuntime)
 			break;
+		if (operation.isCancelled) return;
 	}
 }
 

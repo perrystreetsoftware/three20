@@ -245,6 +245,6 @@
  * esilver added
  * Remove old files from cache
  */
-- (void) removeFilesOlderThan:(NSDate*)oldestDate maxRuntime:(NSTimeInterval)maxRuntime;
+- (void) removeFilesOlderThan:(NSDate*)oldestDate maxRuntime:(NSTimeInterval)maxRuntime inOperation:(NSOperation*)operation;
 
 @end
