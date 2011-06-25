@@ -229,6 +229,13 @@
 - (BOOL)send;
 
 /**
+ * Attempt to send a request, but don't put it in the queue if it's all backed up
+ *
+ * @return YES if the request was loaded synchronously from the cache.
+ */
+- (BOOL)sendUnqueued;
+
+/**
  * Attempt to send a synchronous request.
  *
  * The request will happen synchronously, regardless of whether the data is being grabbed from

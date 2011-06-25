@@ -90,6 +90,12 @@
 - (BOOL)sendRequest:(TTURLRequest*)request;
 
 /**
+ * Load a request but don't queue it up if the queue is jammed
+ * // es added
+ */
+- (BOOL)sendUnqueuedRequest:(TTURLRequest*)request;
+
+/**
  * Synchronously load a request from the cache or the network if it is not in the cache.
  *
  * @return YES if the request was loaded from the cache.

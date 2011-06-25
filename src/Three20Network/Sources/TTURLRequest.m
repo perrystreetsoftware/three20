@@ -305,6 +305,22 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
   return [[TTURLRequestQueue mainQueue] sendRequest:self];
 }
 
+- (BOOL)sendUnqueued {
+	if (_parameters) {
+		// Don't log passwords. Save now, restore after logging
+		NSString* password = [_parameters objectForKey:@"password"];
+		if (_filterPasswordLogging && password) {
+			[_parameters setObject:@"[FILTERED]" forKey:@"password"];
+		}
+		
+		TTDCONDITIONLOG(TTDFLAG_URLREQUEST, @"SEND %@ %@", self.urlPath, self.parameters);
+		
+		if (password) {
+			[_parameters setObject:password forKey:@"password"];
+		}
+	}
+	return [[TTURLRequestQueue mainQueue] sendUnqueuedRequest:self];
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)sendSynchronously {

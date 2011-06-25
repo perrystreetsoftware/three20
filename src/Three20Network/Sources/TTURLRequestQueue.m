@@ -385,6 +385,64 @@ static TTURLRequestQueue* gMainQueue = nil;
   return NO;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (BOOL)sendUnqueuedRequest:(TTURLRequest*)request {
+	if ([self loadRequestFromCache:request]) {
+		return YES;
+	}
+	
+	for (id<TTURLRequestDelegate> delegate in request.delegates) {
+		if ([delegate respondsToSelector:@selector(requestDidStartLoad:)]) {
+			[delegate requestDidStartLoad:request];
+		}
+	}
+	
+	// If the url is empty, fail.
+	if (!request.urlPath.length) {
+		NSError* error = [NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorBadURL userInfo:nil];
+		for (id<TTURLRequestDelegate> delegate in request.delegates) {
+			if ([delegate respondsToSelector:@selector(request:didFailLoadWithError:)]) {
+				[delegate request:request didFailLoadWithError:error];
+			}
+		}
+		return NO;
+	}
+	
+	request.isLoading = YES;
+	
+	TTRequestLoader* loader = nil;
+	
+	// If we're not POSTing or PUTting data, let's see if we can jump on an existing request.
+	if (![request.httpMethod isEqualToString:@"POST"]
+		&& ![request.httpMethod isEqualToString:@"PUT"]) {
+		// Next, see if there is an active loader for the URL and if so join that bandwagon.
+		loader = [_loaders objectForKey:request.cacheKey];
+		if (loader) {
+			[loader addRequest:request];
+			return NO;
+		}
+	}
+	
+	// Finally, create a new loader and hit the network (unless we are suspended)
+	loader = [[TTRequestLoader alloc] initForRequest:request queue:self];
+	[_loaders setObject:loader forKey:request.cacheKey];
+	if (_suspended || _totalLoading == kMaxConcurrentLoads) {
+		NSError* error = [NSError errorWithDomain:NSURLErrorDomain code:kCFURLErrorTimedOut userInfo:nil];
+		for (id<TTURLRequestDelegate> delegate in request.delegates) {
+			if ([delegate respondsToSelector:@selector(request:didFailLoadWithError:)]) {
+				[delegate request:request didFailLoadWithError:error];
+			}
+		}
+		return NO;
+	} else {
+		++_totalLoading;
+		[loader load:[NSURL URLWithString:request.urlPath]];
+	}
+	[loader release];
+	
+	return NO;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)sendSynchronousRequest:(TTURLRequest*)request {
