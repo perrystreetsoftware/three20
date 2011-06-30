@@ -27,7 +27,7 @@
 // Core
 #import "Three20Core/TTCorePreprocessorMacros.h"
 
-static const NSInteger kOffscreenPages = 1;
+static const NSInteger kOffscreenPages = 2;
 static const CGFloat kDefaultPageSpacing = 40.0;
 static const CGFloat kFlickThreshold = 60.0;
 static const CGFloat kTapZoom = 0.75;
@@ -49,6 +49,7 @@ static const CGFloat kFrameDuration = 1.0/40.0;
 @synthesize dataSource      = _dataSource;
 @synthesize centerPageIndex = _centerPageIndex;
 @synthesize pageSpacing     = _pageSpacing;
+@synthesize pageWidth       = _pageWidth;
 @synthesize scrollEnabled   = _scrollEnabled;
 @synthesize zoomEnabled     = _zoomEnabled;
 @synthesize rotateEnabled   = _rotateEnabled;
@@ -181,11 +182,16 @@ static const CGFloat kFrameDuration = 1.0/40.0;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+// es modified
 - (CGFloat)pageWidth {
   if (UIInterfaceOrientationIsLandscape(_orientation)) {
     return self.height;
   } else {
-    return self.width;
+	  if (_pageWidth > 0)
+	  {
+		  return _pageWidth;
+	  }
+	  return self.width;
   }
 }
 

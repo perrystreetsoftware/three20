@@ -27,6 +27,7 @@
   BOOL            _zoomEnabled;
   BOOL            _rotateEnabled;
   CGFloat         _pageSpacing;
+  CGFloat         _pageWidth;
   NSTimeInterval  _holdsAfterTouchingForInterval;
 
   UIInterfaceOrientation  _orientation;
@@ -136,6 +137,11 @@
  * @default 40
  */
 @property (nonatomic) CGFloat pageSpacing;
+
+/**
+ * Total width of pages; es added
+ */
+@property (nonatomic) CGFloat pageWidth;
 
 @property (nonatomic)           UIInterfaceOrientation  orientation;
 @property (nonatomic, readonly) NSInteger               numberOfPages;
