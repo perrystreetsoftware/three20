@@ -426,7 +426,7 @@ static TTURLRequestQueue* gMainQueue = nil;
 	// Finally, create a new loader and hit the network (unless we are suspended)
 	loader = [[TTRequestLoader alloc] initForRequest:request queue:self];
 	[_loaders setObject:loader forKey:request.cacheKey];
-	if (_suspended || _totalLoading == kMaxConcurrentLoads) {
+	if (_suspended) { // only suspension prevents us from attempting to load our request
 		NSError* error = [NSError errorWithDomain:NSURLErrorDomain code:kCFURLErrorTimedOut userInfo:nil];
 		for (id<TTURLRequestDelegate> delegate in request.delegates) {
 			if ([delegate respondsToSelector:@selector(request:didFailLoadWithError:)]) {
