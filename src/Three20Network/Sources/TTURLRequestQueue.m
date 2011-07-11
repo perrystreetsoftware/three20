@@ -34,7 +34,7 @@
 #import "Three20Core/TTDebug.h"
 
 static const NSTimeInterval kFlushDelay = 0.3;
-static const NSTimeInterval kTimeout = 15.0; // es modififed from 60
+static const NSTimeInterval kTimeout = 60; 
 static const NSInteger kMaxConcurrentLoads = 5;
 //static NSUInteger kDefaultMaxContentLength = 150000; // es modified
 static NSUInteger kDefaultMaxContentLength = 2097152;
