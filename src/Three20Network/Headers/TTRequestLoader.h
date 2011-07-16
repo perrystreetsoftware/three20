@@ -51,6 +51,7 @@
   NSHTTPURLResponse*      _response;
   NSMutableData*          _responseData;
 
+  NSDate *                _creationTime;
   /**
    * When load requests fail we'll attempt the request again, as many as 2 times by default.
    */
@@ -93,6 +94,8 @@
  */
 @property (nonatomic, readonly) NSString* URL __TTDEPRECATED_METHOD;
 
+// es added
+@property (nonatomic, readonly) NSDate *creationTime;
 
 - (id)initForRequest:(TTURLRequest*)request queue:(TTURLRequestQueue*)queue;
 

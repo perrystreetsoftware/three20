@@ -44,7 +44,7 @@ static const NSInteger kLoadMaxRetries = 2;
 @synthesize cacheKey            = _cacheKey;
 @synthesize cachePolicy         = _cachePolicy;
 @synthesize cacheExpirationAge  = _cacheExpirationAge;
-
+@synthesize creationTime        = _creationTime;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initForRequest:(TTURLRequest*)request queue:(TTURLRequestQueue*)queue {
@@ -56,7 +56,7 @@ static const NSInteger kLoadMaxRetries = 2;
     _cacheExpirationAge = request.cacheExpirationAge;
     _requests           = [[NSMutableArray alloc] init];
     _retriesLeft        = kLoadMaxRetries;
-
+	_creationTime       = [[NSDate date] retain];
     [self addRequest:request];
   }
   return self;
@@ -72,6 +72,7 @@ static const NSInteger kLoadMaxRetries = 2;
   TT_RELEASE_SAFELY(_urlPath);
   TT_RELEASE_SAFELY(_cacheKey);
   TT_RELEASE_SAFELY(_requests);
+  TT_RELEASE_SAFELY(_creationTime);
   [super dealloc];
 }
 

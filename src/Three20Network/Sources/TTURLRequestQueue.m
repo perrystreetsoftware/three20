@@ -38,7 +38,7 @@ static const NSTimeInterval kTimeout = 60;
 static const NSInteger kMaxConcurrentLoads = 5;
 //static NSUInteger kDefaultMaxContentLength = 150000; // es modified
 static NSUInteger kDefaultMaxContentLength = 2097152;
-
+static NSUInteger kLoaderBackupTime = 10; /* es added  - 10 sec to consider backup */
 static TTURLRequestQueue* gMainQueue = nil;
 
 
@@ -375,7 +375,15 @@ static TTURLRequestQueue* gMainQueue = nil;
   loader = [[TTRequestLoader alloc] initForRequest:request queue:self];
   [_loaders setObject:loader forKey:request.cacheKey];
   if (_suspended || _totalLoading == kMaxConcurrentLoads) {
-    [_loaderQueue addObject:loader];
+	  if ([_loaderQueue count] > 0)
+	  {
+		  TTRequestLoader *queuedLoader = [_loaderQueue objectAtIndex:0];
+		  if (([queuedLoader.creationTime timeIntervalSinceNow] * -1) > kLoaderBackupTime)
+		  {
+			  [[NSNotificationCenter defaultCenter] postNotificationName:@"LoaderBackedUp" object:nil];
+		  }
+	  }
+	  [_loaderQueue addObject:loader];
   } else {
     ++_totalLoading;
     [loader load:[NSURL URLWithString:request.urlPath]];
