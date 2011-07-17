@@ -35,7 +35,7 @@
 
 static const NSTimeInterval kFlushDelay = 0.3;
 static const NSTimeInterval kTimeout = 60; 
-static const NSInteger kMaxConcurrentLoads = 5;
+static const NSInteger kMaxConcurrentLoads = 7;
 //static NSUInteger kDefaultMaxContentLength = 150000; // es modified
 static NSUInteger kDefaultMaxContentLength = 2097152;
 static NSUInteger kLoaderBackupTime = 10; /* es added  - 10 sec to consider backup */
