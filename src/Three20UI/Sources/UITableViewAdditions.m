@@ -48,7 +48,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat)tableCellMargin {
   if (self.style == UITableViewStyleGrouped) {
-    return 10;
+	return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ?
+	  44 : 10;
   } else {
     return 0;
   }
