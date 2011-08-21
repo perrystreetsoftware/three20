@@ -36,5 +36,11 @@
   return [cls tableView:tableView rowHeightForObject:object];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
+{
+	UIView *header = [self tableView:tableView viewForHeaderInSection:section];
+	if (header) return header.frame.size.height;
+    return 0;
+}
 
 @end
