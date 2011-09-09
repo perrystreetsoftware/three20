@@ -415,7 +415,7 @@ static const CGFloat kMinCursorWidth  = 50;
 
   SEL sel = @selector(textField:didAddCellAtIndex:);
   if ([self.delegate respondsToSelector:sel]) {
-    [self.delegate performSelector:sel withObject:self withObject:(id)_cellViews.count-1];
+      [(id <TTPickerTextFieldDelegate>)self.delegate textField:self didAddCellAtIndex:(_cellViews.count - 1)];
   }
 }
 
