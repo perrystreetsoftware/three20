@@ -434,18 +434,20 @@ static TTURLRequestQueue* gMainQueue = nil;
 	// Finally, create a new loader and hit the network (unless we are suspended)
 	loader = [[TTRequestLoader alloc] initForRequest:request queue:self];
 	[_loaders setObject:loader forKey:request.cacheKey];
-	if (_suspended) { // only suspension prevents us from attempting to load our request
-		NSError* error = [NSError errorWithDomain:NSURLErrorDomain code:kCFURLErrorTimedOut userInfo:nil];
-		for (id<TTURLRequestDelegate> delegate in request.delegates) {
-			if ([delegate respondsToSelector:@selector(request:didFailLoadWithError:)]) {
-				[delegate request:request didFailLoadWithError:error];
-			}
-		}
-		return NO;
-	} else {
+	
+	// es modified -- unqueued requests cannot be suspended
+//	if (_suspended) { // only suspension prevents us from attempting to load our request
+//		NSError* error = [NSError errorWithDomain:NSURLErrorDomain code:kCFURLErrorTimedOut userInfo:nil];
+//		for (id<TTURLRequestDelegate> delegate in request.delegates) {
+//			if ([delegate respondsToSelector:@selector(request:didFailLoadWithError:)]) {
+//				[delegate request:request didFailLoadWithError:error];
+//			}
+//		}
+//		return NO;
+//	} else {
 		++_totalLoading;
 		[loader load:[NSURL URLWithString:request.urlPath]];
-	}
+//	}
 	[loader release];
 	
 	return NO;
