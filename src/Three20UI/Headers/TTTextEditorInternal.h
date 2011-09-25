@@ -25,10 +25,13 @@
   BOOL          _ignoreBeginAndEnd;
 
   id<TTTextEditorDelegate> _delegate;
+	NSUInteger _lastTextFieldLocation;
+	NSUInteger _lastTextViewLocation;
 }
 
 @property (nonatomic) BOOL ignoreBeginAndEnd;
-
+@property (nonatomic) NSUInteger lastTextFieldLocation;
+@property (nonatomic) NSUInteger lastTextViewLocation;
 @property (nonatomic, assign) id<TTTextEditorDelegate> delegate;
 
 - (id)initWithTextEditor:(TTTextEditor*)textEditor;

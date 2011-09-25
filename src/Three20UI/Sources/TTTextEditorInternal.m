@@ -27,7 +27,8 @@
 
 @synthesize ignoreBeginAndEnd = _ignoreBeginAndEnd;
 @synthesize delegate          = _delegate;
-
+@synthesize lastTextFieldLocation = _lastTextFieldLocation;
+@synthesize lastTextViewLocation = _lastTextViewLocation;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithTextEditor:(TTTextEditor*)textEditor {
@@ -96,6 +97,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text {
+	
+  _lastTextViewLocation = range.location;
   if ([text isEqualToString:@"\n"]) {
     if ([_delegate respondsToSelector:@selector(textEditorShouldReturn:)]) {
       if (![_delegate performSelector:@selector(textEditorShouldReturn:) withObject:_textEditor]) {
@@ -191,6 +194,7 @@
   if (shouldChange) {
     [self performSelector:@selector(textViewDidChange:) withObject:nil afterDelay:0];
   }
+	_lastTextFieldLocation = range.location;
   return shouldChange;
 }
 

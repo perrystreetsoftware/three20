@@ -195,6 +195,7 @@ static const CGFloat kUITextViewVerticalPadding = 6;
     _textView.hidden = NO;
     _textView.text = _textField.text;
     _internal.ignoreBeginAndEnd = YES;
+	_textView.selectedRange = NSMakeRange(_internal.lastTextFieldLocation + 1, 0);
     [_textView becomeFirstResponder];
     [self performSelector:@selector(stopIgnoringBeginAndEnd) withObject:nil afterDelay:0];
   } else if (numberOfLines == 1 && _textField.hidden) {
