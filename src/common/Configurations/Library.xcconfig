@@ -22,6 +22,11 @@ GCC_PRECOMPILE_PREFIX_HEADER  = YES
 GCC_PREFIX_HEADER             = $(SRCROOT)/Headers/$(PRODUCT_NAME)_Prefix.pch
 RUN_CLANG_STATIC_ANALYZER     = NO
 
+// Don't include the Three20 libraries in the archive. This makes it possible to build IPAs
+// in Xcode 4.
+SKIP_INSTALL = YES
+ARCHS_STANDARD_32_BIT = armv6 armv7
+
 // Linker Flags
 
 OTHER_LDFLAGS           = $(OBJC_LIBRARY)
