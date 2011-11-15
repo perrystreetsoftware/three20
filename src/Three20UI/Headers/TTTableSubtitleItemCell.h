@@ -20,6 +20,7 @@
 @class TTImageView;
 
 @interface TTTableSubtitleItemCell : TTTableLinkedItemCell {
+@protected
   TTImageView* _imageView2;
 }
 
