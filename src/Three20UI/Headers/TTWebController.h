@@ -69,6 +69,9 @@
  */
 - (void)openRequest:(NSURLRequest*)request;
 
+/* esilver - expose so we can override */
+- (id)initWithNavigatorURL:(NSURL*)URL query:(NSDictionary*)query;
+
 @end
 
 
