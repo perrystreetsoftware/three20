@@ -88,6 +88,9 @@
 
 - (id)initWithName:(NSString*)name;
 
+// es added
+- (id)initPersistentWithName:(NSString*)name;
+
 /**
  * Gets the key that would be used to cache a URL response.
  */

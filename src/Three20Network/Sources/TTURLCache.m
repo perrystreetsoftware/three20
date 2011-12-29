@@ -14,6 +14,8 @@
 // limitations under the License.
 //
 
+#include <sys/xattr.h>
+
 #import "Three20Network/TTURLCache.h"
 
 // Network
@@ -41,6 +43,8 @@ static NSMutableDictionary* gNamedCaches = nil;
 @interface TTURLCache()
 
 + (NSString*)cachePathWithName:(NSString*)name;
++ (NSString*)persistentCachePathWithName:(NSString*)name;
++ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL;
 
 @end
 
@@ -56,6 +60,28 @@ static NSMutableDictionary* gNamedCaches = nil;
 @synthesize maxPixelCount     = _maxPixelCount;
 @synthesize invalidationAge   = _invalidationAge;
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (id)initPersistentWithName:(NSString*)name {
+	if (self == [super init]) {
+		_name             = [name copy];
+		_cachePath        = [[TTURLCache persistentCachePathWithName:name] retain];
+		_invalidationAge  = TT_DEFAULT_CACHE_INVALIDATION_AGE;
+		
+		// XXXjoe Disabling the built-in cache may save memory but it also makes UIWebView slow
+		// NSURLCache* sharedCache = [[NSURLCache alloc] initWithMemoryCapacity:0 diskCapacity:0
+		// diskPath:nil];
+		// [NSURLCache setSharedURLCache:sharedCache];
+		// [sharedCache release];
+		
+		[[NSNotificationCenter defaultCenter]
+		 addObserver: self
+		 selector: @selector(didReceiveMemoryWarning:)
+		 name: UIApplicationDidReceiveMemoryWarningNotification
+		 object: nil];
+	}
+	return self;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithName:(NSString*)name {
@@ -158,6 +184,53 @@ static NSMutableDictionary* gNamedCaches = nil;
   return succeeded;
 }
 
++ (void) upgradeToPersistentCache:(NSString*)name
+{
+	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	NSString* cachesPath = [paths objectAtIndex:0];
+	NSString* cachePath = [cachesPath stringByAppendingPathComponent:name];
+
+	NSArray* documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString* documentsCachesPath = [documentPaths objectAtIndex:0];
+	NSString* documentsCachePath = [documentsCachesPath stringByAppendingPathComponent:name];
+	
+	NSFileManager* fm = [NSFileManager defaultManager];
+	if ([fm fileExistsAtPath:cachePath]) 		
+	{
+		NSError *error = nil;			
+		if (![fm moveItemAtPath:cachePath 
+						 toPath:documentsCachePath
+						  error:&error])
+		{
+			NSLog(@"Error upgrading to persistent cache: %@", [error localizedDescription]);
+		} 
+		else
+		{
+			NSArray *dirContents = [fm contentsOfDirectoryAtPath:documentsCachePath error:&error];
+			for (NSString *fileName in dirContents)
+			{
+				[TTURLCache addSkipBackupAttributeToItemAtURL:[NSURL URLWithString:fileName]];
+			}
+		}
+	}
+}
+
++ (NSString*)persistentCachePathWithName:(NSString*)name
+{
+	NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *cachesPath = [documentPaths objectAtIndex:0];
+	NSString* cachePath = [cachesPath stringByAppendingPathComponent:name];
+	NSString* etagCachePath = [cachePath stringByAppendingPathComponent:kEtagCacheDirectoryName];
+	
+	// Moves folder from /Caches to /Documents, and flag all files
+	[TTURLCache upgradeToPersistentCache:name];
+	
+	[self createPathIfNecessary:cachesPath];
+	[self createPathIfNecessary:cachePath];
+	[self createPathIfNecessary:etagCachePath];
+	
+	return cachePath;	
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 + (NSString*)cachePathWithName:(NSString*)name {
@@ -458,6 +531,7 @@ static NSMutableDictionary* gNamedCaches = nil;
     NSString* filePath = [self cachePathForKey:key];
     NSFileManager* fm = [NSFileManager defaultManager];
     [fm createFileAtPath:filePath contents:data attributes:nil];
+    [TTURLCache addSkipBackupAttributeToItemAtURL:[NSURL URLWithString:filePath]];
   }
 }
 
@@ -475,6 +549,7 @@ static NSMutableDictionary* gNamedCaches = nil;
   [fm createFileAtPath: filePath
               contents: [etag dataUsingEncoding:NSUTF8StringEncoding]
             attributes: nil];
+  [TTURLCache addSkipBackupAttributeToItemAtURL:[NSURL URLWithString:filePath]];
 }
 
 
@@ -687,6 +762,16 @@ static NSMutableDictionary* gNamedCaches = nil;
 			break;
 		if (operation.isCancelled) return;
 	}
+}
+
+// Code from http://developer.apple.com/library/ios/#qa/qa1719/_index.html
++ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+{
+    const char* filePath = [[URL path] fileSystemRepresentation];
+    const char* attrName = "com.apple.MobileBackup";
+    u_int8_t attrValue = 1;
+    int result = setxattr(filePath, attrName, &attrValue, sizeof(attrValue), 0, 0);
+    return result == 0;
 }
 
 @end
