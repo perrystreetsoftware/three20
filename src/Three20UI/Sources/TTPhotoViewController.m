@@ -222,6 +222,11 @@ static const NSInteger kActivityLabelTag          = 96;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (CGFloat) getAdHeight
+{
+	return 0;
+}
+
 - (void)updateToolbarWithOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	
 	CGFloat oldHeight = _toolbar.height;
@@ -231,14 +236,14 @@ static const NSInteger kActivityLabelTag          = 96;
     _toolbar.height = TT_LANDSCAPE_TOOLBAR_HEIGHT+1;
   }
 	
-  _toolbar.top = self.view.height - _toolbar.height;
+  _toolbar.top = self.view.height - _toolbar.height - [self getAdHeight];
 
 	// es added
 	CGFloat heightChange = _toolbar.height - oldHeight;
 	
 	CGRect oldScrollFrame = _scrollView.frame;
 	_scrollView.frame = CGRectMake(oldScrollFrame.origin.x, oldScrollFrame.origin.y, oldScrollFrame.size.width,
-								   oldScrollFrame.size.height - heightChange);
+								   oldScrollFrame.size.height - heightChange - [self getAdHeight]);
 }
 
 
@@ -470,7 +475,6 @@ static const NSInteger kActivityLabelTag          = 96;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 #pragma mark UIViewController
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)loadView {

@@ -65,6 +65,10 @@
   return self;
 }
 
+- (CGFloat) getAdHeight
+{
+	return 0;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc {
@@ -182,7 +186,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)layoutSubviews {
-  CGRect screenBounds = TTScreenBounds();
+  CGRect actualScreenBounds = TTScreenBounds();
+  CGRect screenBounds = CGRectMake(actualScreenBounds.origin.x, actualScreenBounds.origin.y,
+								   actualScreenBounds.size.width, actualScreenBounds.size.height - [self getAdHeight]);	
   CGFloat width = self.width;
   CGFloat height = self.height;
   CGFloat cx = self.bounds.origin.x + width/2;

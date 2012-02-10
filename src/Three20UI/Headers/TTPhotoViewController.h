@@ -113,5 +113,6 @@
  * Shows or hides an activity label on top of the photo.
  */
 - (void)showActivity:(NSString*)title;
+- (CGFloat) getAdHeight;
 
 @end
