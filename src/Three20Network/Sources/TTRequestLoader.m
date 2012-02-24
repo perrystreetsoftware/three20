@@ -378,7 +378,8 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
 #pragma mark Authentication
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace 
 {
-	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+//	return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+	return NO;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
