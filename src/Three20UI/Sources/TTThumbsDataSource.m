@@ -80,7 +80,7 @@ static CGFloat kThumbSpacing = 4;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSInteger)columnCount {
   CGFloat width = TTScreenBounds().size.width;
-  return round((width - kThumbSpacing*2) / (kThumbSize+kThumbSpacing));
+  return floor((width - kThumbSpacing*2) / (kThumbSize+kThumbSpacing));
 }
 
 
