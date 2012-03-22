@@ -239,9 +239,9 @@ static const NSInteger kActivityLabelTag          = 96;
   _toolbar.top = self.view.height - _toolbar.height - [self getAdHeight];
 
 	// es added
-	CGFloat heightChange = _toolbar.height - oldHeight;
-	
-	CGRect oldScrollFrame = _scrollView.frame;
+	CGFloat heightChange = _toolbar.height - oldHeight;	
+	CGRect oldScrollFrame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height - _toolbar.height);
+
 	_scrollView.frame = CGRectMake(oldScrollFrame.origin.x, oldScrollFrame.origin.y, oldScrollFrame.size.width,
 								   oldScrollFrame.size.height - heightChange - [self getAdHeight]);
 }
