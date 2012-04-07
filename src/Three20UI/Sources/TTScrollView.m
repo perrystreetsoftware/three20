@@ -240,24 +240,28 @@ static const CGFloat kFrameDuration = 1.0/40.0;
   }
 
   CGFloat width, height;
-  if (UIInterfaceOrientationIsLandscape(_orientation)) {
-    if (size.width > size.height) {
-      height = self.height;
-      width = size.height/size.width * self.height;
-    } else {
-      height = size.width/size.height * self.width;
-      width = self.width;
-    }
-  } else {
-    if (size.width > size.height) {
-      width = self.width;
-      height = size.height/size.width * self.width;
-    } else {
-      width = size.width/size.height * self.height;
-      height = self.height;
-    }
-  }
-
+//  if (UIInterfaceOrientationIsLandscape(_orientation)) {
+//    if (size.width > size.height) {
+//      height = self.height;
+//      width = size.height/size.width * self.height;
+//    } else {
+//      height = size.width/size.height * self.width;
+//      width = self.width;
+//    }
+//  } else {
+//    if (size.width > size.height) {
+//      width = self.width;
+//      height = size.height/size.width * self.width;
+//    } else {
+//      width = size.width/size.height * self.height;
+//      height = self.height;
+//    }
+//  }
+  // http://stackoverflow.com/questions/1373035/how-do-i-scale-one-rectangle-to-the-maximum-size-possible-within-another-rectang
+  CGFloat scale = MIN(self.width/size.width, self.height/size.height);
+  width = size.width * scale;
+  height = size.height * scale;
+	
   CGFloat xd = width - self.width;
   CGFloat yd = height - self.height;
   return CGRectMake(-xd/2, -yd/2, width, height);
