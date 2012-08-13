@@ -199,7 +199,12 @@ UIKIT_EXTERN NSString *const UIApplicationWillEnterForegroundNotification __attr
   if (controller != _rootViewController) {
     [_rootViewController release];
     _rootViewController = [controller retain];
-    [self.window addSubview:_rootViewController.view];
+	  
+	if ([self.window respondsToSelector:@selector(setRootViewController:)]) {
+		[self.window setRootViewController:_rootViewController];
+	} else {
+		[self.window addSubview:_rootViewController.view];
+	}
   }
 }
 
