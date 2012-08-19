@@ -58,6 +58,7 @@ static const CGFloat kCancelHighlightThreshold = 4;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)dealloc {
   TT_RELEASE_SAFELY(_highlightedLabel);
+  TT_RELEASE_SAFELY(_originShadow);
 
   [super dealloc];
 }
@@ -231,7 +232,7 @@ static const CGFloat kCancelHighlightThreshold = 4;
 
   // Initialize the shadow layers.
   if (nil == _originShadow) {
-    _originShadow = [self shadowAsInverse:NO];
+    _originShadow = [[self shadowAsInverse:NO] retain];
     [self.layer insertSublayer:_originShadow atIndex:0];
 
   } else if (![[self.layer.sublayers objectAtIndex:0] isEqual:_originShadow]) {
