@@ -28,7 +28,7 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat)ttLineHeight {
-  return (self.ascender - self.descender) + 1;
+  return roundf((self.ascender - self.descender) + 1);
 }
 
 @end
