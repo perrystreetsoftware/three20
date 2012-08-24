@@ -298,7 +298,7 @@ static const NSTimeInterval kGarbageCollectionInterval = 20;
 		[[UIApplication sharedApplication] setStatusBarHidden:!show withAnimation:animated ? UIStatusBarAnimationFade : UIStatusBarAnimationNone];
 	else
 #endif
-		[[UIApplication sharedApplication] setStatusBarHidden:!show animated:animated];
+		[[UIApplication sharedApplication] setStatusBarHidden:!show withAnimation:UIStatusBarAnimationFade];
 
   if (animated) {
     [UIView beginAnimations:nil context:NULL];

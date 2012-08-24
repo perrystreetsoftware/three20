@@ -137,7 +137,7 @@ static const CGFloat kMarginY = 6;
       [app setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     else
 #endif
-    [app setStatusBarHidden:NO animated:YES];
+    [app setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     [app setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
   }
   [_textView becomeFirstResponder];
@@ -152,7 +152,7 @@ static const CGFloat kMarginY = 6;
     [app setStatusBarHidden:_originalStatusBarHidden withAnimation:UIStatusBarAnimationSlide];
   else
 #endif
-  [app setStatusBarHidden:_originalStatusBarHidden animated:YES];
+  [app setStatusBarHidden:_originalStatusBarHidden withAnimation:UIStatusBarAnimationFade];
   [app setStatusBarStyle:_originalStatusBarStyle animated:NO];
   [_textView resignFirstResponder];
 }
