@@ -91,25 +91,22 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)resizeForKeyboard:(NSNotification*)notification appearing:(BOOL)appearing {
-	CGRect keyboardBounds;
-	[[notification.userInfo objectForKey:UIKeyboardBoundsUserInfoKey] getValue:&keyboardBounds];
+	CGRect keyboardStart;
+	[[notification.userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardStart];
 
-	CGPoint keyboardStart;
-	[[notification.userInfo objectForKey:UIKeyboardCenterBeginUserInfoKey] getValue:&keyboardStart];
+	CGRect keyboardEnd;
+	[[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEnd];
 
-	CGPoint keyboardEnd;
-	[[notification.userInfo objectForKey:UIKeyboardCenterEndUserInfoKey] getValue:&keyboardEnd];
-
-	BOOL animated = keyboardStart.y != keyboardEnd.y;
+	BOOL animated = keyboardStart.origin.y != keyboardEnd.origin.y;
   if (animated) {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:TT_TRANSITION_DURATION];
   }
 
   if (appearing) {
-    [self keyboardWillAppear:animated withBounds:keyboardBounds];
+    [self keyboardWillAppear:animated withBounds:keyboardEnd];
   } else {
-    [self keyboardDidDisappear:animated withBounds:keyboardBounds];
+    [self keyboardDidDisappear:animated withBounds:keyboardEnd];
   }
 
   if (animated) {
@@ -282,7 +279,7 @@
   CGRect keyboardBounds = CGRectMake(0, 0, frameStart.size.width, frameStart.size.height);
 #else
   CGRect keyboardBounds;
-  [[notification.userInfo objectForKey:UIKeyboardBoundsUserInfoKey] getValue:&keyboardBounds];
+  [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
 #endif
 
   [self keyboardDidAppear:YES withBounds:keyboardBounds];
@@ -306,7 +303,7 @@
   CGRect keyboardBounds = CGRectMake(0, 0, frameEnd.size.width, frameEnd.size.height);
 #else
   CGRect keyboardBounds;
-  [[notification.userInfo objectForKey:UIKeyboardBoundsUserInfoKey] getValue:&keyboardBounds];
+  [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
 #endif
 
   [self keyboardWillDisappear:YES withBounds:keyboardBounds];
