@@ -81,7 +81,7 @@ static const CGFloat kFrameDuration = 1.0/40.0;
     _scrollEnabled = YES;
     _zoomEnabled = YES;
     _rotateEnabled = YES;
-    _orientation = UIDeviceOrientationPortrait;
+    _orientation = UIInterfaceOrientationPortrait;
     _decelerationRate = 0.9;      // Inertia, how faster slow the residual movement.
     _maximumZoomScale = 4.0;      // Maximum zoom scale default value.
 
