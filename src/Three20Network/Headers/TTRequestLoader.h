@@ -36,7 +36,7 @@
  * TTURLRequestQueue's sendRequest.
  * For all other TTURLRequest types, they will each have their own loader.
  */
-@interface TTRequestLoader : NSObject {
+@interface TTRequestLoader : NSObject <NSURLConnectionDelegate> {
   NSString*               _urlPath;
 
   TTURLRequestQueue*      _queue;
@@ -132,5 +132,9 @@
 - (void)dispatchLoaded:(NSDate*)timestamp;
 - (void)dispatchAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge;
 - (void)cancel;
+
+- (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSHTTPURLResponse*)response;
+- (void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)data;
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 
 @end
