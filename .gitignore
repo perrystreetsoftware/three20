@@ -14,3 +14,4 @@ src/Three20UICommon/*.h
 src/Three20UINavigator/*.h
 src/Three20UI/*.h
 *.xcuserdatad
+*.xcworkspacedata
