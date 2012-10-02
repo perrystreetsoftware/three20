@@ -29,7 +29,7 @@
 @synthesize icon        = _icon;
 @synthesize object      = _object;
 @synthesize badgeNumber = _badgeNumber;
-
+@synthesize viewTag     = _viewTag;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithTitle:(NSString*)title {

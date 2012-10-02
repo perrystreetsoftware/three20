@@ -15,7 +15,7 @@
 //
 
 #import "Three20UI/TTTabBar.h"
-
+#import "Three20UI/TTTabItem.h"
 // UI
 #import "Three20UI/TTTab.h"
 #import "Three20UI/TTTabDelegate.h"
@@ -175,6 +175,10 @@
   for (int i = 0; i < _tabItems.count; ++i) {
     TTTabItem* tabItem = [_tabItems objectAtIndex:i];
     TTTab* tab = [[[TTTab alloc] initWithItem:tabItem tabBar:self] autorelease];
+    if (tabItem.viewTag)
+    {
+        [tab setTag:tabItem.viewTag];
+    }
     [tab setStylesWithSelector:self.tabStyle];
     [tab addTarget:self action:@selector(tabTouchedUp:) forControlEvents:UIControlEventTouchUpInside];
     [self addTab:tab];

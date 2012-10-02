@@ -24,12 +24,14 @@
   id        _object;
   int       _badgeNumber;
   TTTabBar* _tabBar;
+  NSInteger _viewTag;
 }
 
 @property (nonatomic, copy)   NSString* title;
 @property (nonatomic, copy)   NSString* icon;
 @property (nonatomic, retain) id        object;
 @property (nonatomic)         int       badgeNumber;
+@property (nonatomic)         NSInteger       viewTag;
 
 - (id)initWithTitle:(NSString*)title;
 
