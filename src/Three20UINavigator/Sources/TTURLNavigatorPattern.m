@@ -441,6 +441,7 @@ static NSString* kUniversalURLPattern = @"*";
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)createObjectFromURL: (NSURL*)URL
                     query: (NSDictionary*)query {
+    // NOTE THAT YOU CAN IGNORE STATIC ANALYZER WARNING: https://github.com/facebook/three20/blob/master/src/Three20UINavigator/Sources/TTURLNavigatorPattern.m
   id target = nil;
   if (self.instantiatesClass) {
     target = [_targetClass alloc];
