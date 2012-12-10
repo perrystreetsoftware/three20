@@ -51,6 +51,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 @synthesize cacheKey              = _cacheKey;
 
 @synthesize timestamp             = _timestamp;
+@synthesize initiatedAt           = _initiatedAt;
 
 @synthesize totalBytesLoaded      = _totalBytesLoaded;
 @synthesize totalBytesExpected    = _totalBytesExpected;
@@ -114,6 +115,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
   TT_RELEASE_SAFELY(_cacheKey);
   TT_RELEASE_SAFELY(_userInfo);
   TT_RELEASE_SAFELY(_timestamp);
+  TT_RELEASE_SAFELY(_initiatedAt);
   TT_RELEASE_SAFELY(_files);
   TT_RELEASE_SAFELY(_delegates);
 
@@ -288,6 +290,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)send {
+  self.initiatedAt = [NSDate date];
   if (_parameters) {
     // Don't log passwords. Save now, restore after logging
     NSString* password = [_parameters objectForKey:@"password"];
@@ -305,6 +308,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 }
 
 - (BOOL)sendUnqueued {
+    self.initiatedAt = [NSDate date];
 	if (_parameters) {
 		// Don't log passwords. Save now, restore after logging
 		NSString* password = [_parameters objectForKey:@"password"];
@@ -323,6 +327,7 @@ static NSString* kStringBoundary = @"3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)sendSynchronously {
+  self.initiatedAt = [NSDate date];
   return [[TTURLRequestQueue mainQueue] sendSynchronousRequest:self];
 }
 

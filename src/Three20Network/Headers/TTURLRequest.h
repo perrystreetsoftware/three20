@@ -51,6 +51,7 @@
   NSString*               _cacheKey;
 
   NSDate*               _timestamp;
+  NSDate*               _initiatedAt;
 
   NSInteger             _totalBytesLoaded;
   NSInteger             _totalBytesExpected;
@@ -152,6 +153,7 @@
 @property (nonatomic, retain) id userInfo;
 
 @property (nonatomic, retain) NSDate* timestamp;
+@property (nonatomic, retain) NSDate* initiatedAt;
 
 /**
  * Whether or not the request is currently active.
