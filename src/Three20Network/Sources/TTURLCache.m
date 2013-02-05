@@ -582,7 +582,6 @@ static NSMutableDictionary* gNamedCaches = nil;
   return nil;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSString*)storeTemporaryImage:(UIImage*)image toDisk:(BOOL)toDisk {
   NSString* URL = [self createUniqueTemporaryURL];
@@ -624,6 +623,12 @@ static NSMutableDictionary* gNamedCaches = nil;
   }
 }
 
+- (NSString*)onDiskFilePathForURL:(NSString*)url
+{
+    NSString* key = [self keyForURL:url];
+    NSString* path = [self cachePathForKey:key];
+    return path;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSString*)moveDataFromPathToTemporaryURL:(NSString*)path {

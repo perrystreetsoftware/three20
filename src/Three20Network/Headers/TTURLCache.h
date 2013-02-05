@@ -202,6 +202,9 @@
  */
 - (NSString*)storeTemporaryFile:(NSURL*)fileURL;
 
+// es added
+- (NSString*)onDiskFilePathForURL:(NSString*)url;
+
 /**
  * Moves the data currently stored under one URL to another URL.
  *
