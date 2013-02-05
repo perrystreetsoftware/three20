@@ -141,8 +141,12 @@ static const CGFloat kBannerViewHeight = 22;
     CGRect frame = [self rectForOverlayView];
     _tableOverlayView = [[UIView alloc] initWithFrame:frame];
     _tableOverlayView.autoresizesSubviews = YES;
+      // es: used to be FlexibleBottomMargin, now FlexibleHeight
+      // I think they assumed the tableview frame would stay fixed, but
+      // we change the frame when we have a TabBar, for example, on
+      // ProfileAlbumListViewController
     _tableOverlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth
-    | UIViewAutoresizingFlexibleBottomMargin;
+    | UIViewAutoresizingFlexibleHeight;
     NSInteger tableIndex = [_tableView.superview.subviews indexOfObject:_tableView];
     if (tableIndex != NSNotFound) {
       [_tableView.superview addSubview:_tableOverlayView];
