@@ -51,6 +51,7 @@ static const CGFloat kDefaultThumbSize = 75;
 
     self.accessoryType = UITableViewCellAccessoryNone;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = [UIColor clearColor];
   }
 
   return self;
