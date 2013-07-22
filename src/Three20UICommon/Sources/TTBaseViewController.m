@@ -45,7 +45,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-    _navigationBarStyle = UIBarStyleDefault;
+    _navigationBarStyle = UIBarStyleBlack;
     _statusBarStyle = UIStatusBarStyleDefault;
     
     // es added for iOS7
