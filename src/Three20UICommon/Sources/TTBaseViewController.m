@@ -51,7 +51,7 @@
     // es added for iOS7
     // Let's keep the default behavior, shall we?
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
-        self.edgesForExtendedLayout = UIExtendedEdgeNone;
+        self.edgesForExtendedLayout = UIRectEdgeNone;
 
   }
 
