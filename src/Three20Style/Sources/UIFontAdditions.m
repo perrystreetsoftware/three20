@@ -28,7 +28,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat)ttLineHeight {
-  return roundf((self.ascender - self.descender) + 1);
+    return self.lineHeight;
+    // es added -- now has lineHeight method as of iOS4
+  // return roundf((self.ascender - self.descender) + 1);
 }
 
 @end
