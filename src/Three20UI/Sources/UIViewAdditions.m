@@ -451,18 +451,23 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (NSDictionary *)userInfoForKeyboardNotification {
-  CGRect screenFrame = TTScreenBounds();
-  CGRect bounds = CGRectMake(0, 0, screenFrame.size.width, self.height);
-  CGPoint centerBegin = CGPointMake(floor(screenFrame.size.width/2 - self.width/2),
-                                    screenFrame.size.height + floor(self.height/2));
-  CGPoint centerEnd = CGPointMake(floor(screenFrame.size.width/2 - self.width/2),
-                                  screenFrame.size.height - floor(self.height/2));
-
-  return [NSDictionary dictionaryWithObjectsAndKeys:
-          [NSValue valueWithCGRect:bounds], UIKeyboardBoundsUserInfoKey,
-          [NSValue valueWithCGPoint:centerBegin], UIKeyboardCenterBeginUserInfoKey,
-          [NSValue valueWithCGPoint:centerEnd], UIKeyboardCenterEndUserInfoKey,
-          nil];
+//  CGRect screenFrame = TTScreenBounds();
+//  CGRect bounds = CGRectMake(0, 0, screenFrame.size.width, self.height);
+//  CGPoint centerBegin = CGPointMake(floor(screenFrame.size.width/2 - self.width/2),
+//                                    screenFrame.size.height + floor(self.height/2));
+//  CGPoint centerEnd = CGPointMake(floor(screenFrame.size.width/2 - self.width/2),
+//                                  screenFrame.size.height - floor(self.height/2));
+//
+//  return [NSDictionary dictionaryWithObjectsAndKeys:
+//          [NSValue valueWithCGRect:bounds], UIKeyboardBoundsUserInfoKey,
+//          [NSValue valueWithCGPoint:centerBegin], UIKeyboardCenterBeginUserInfoKey,
+//          [NSValue valueWithCGPoint:centerEnd], UIKeyboardCenterEndUserInfoKey,
+//          nil];
+    
+    // es removed because this is now deprecated and
+    // we do not appear to be using this method anywhere
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
 
