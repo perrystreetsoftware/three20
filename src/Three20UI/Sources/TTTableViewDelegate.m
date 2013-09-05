@@ -218,6 +218,14 @@
   }
 
   [_controller didEndDragging];
+    
+    // Scroll to load more for nearby only
+    if (scrollView.contentSize.height - scrollView.contentOffset.y < scrollView.frame.size.height)
+    {
+        if ([_controller respondsToSelector:@selector(didOverscrollBottom)])
+            [_controller performSelector:@selector(didOverscrollBottom) withObject:nil];
+    }
+
 }
 
 
