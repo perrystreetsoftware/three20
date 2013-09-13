@@ -53,7 +53,7 @@ static const CGFloat kAccessoryWidth = 20;
     self.detailTextLabel.highlightedTextColor = TTSTYLEVAR(highlightedTextColor);
     self.detailTextLabel.adjustsFontSizeToFitWidth = YES;
     self.detailTextLabel.minimumFontSize = 8;
-    self.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
+    self.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.detailTextLabel.numberOfLines = 0;
   }
 
@@ -80,7 +80,7 @@ static const CGFloat kAccessoryWidth = 20;
 	
   CGSize detailTextSize = [item.text sizeWithFont:TTSTYLEVAR(tableSmallFont)
                                 constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)
-                                    lineBreakMode:UILineBreakModeWordWrap];
+                                    lineBreakMode:NSLineBreakByWordWrapping];
 
   return detailTextSize.height + kTableCellVPadding*2;
 }

@@ -49,7 +49,7 @@ static const CGFloat kHighlightTextPadding = 20.0f;
     self.alpha = 0.0;
 
     _textLabel = [[UILabel alloc] init];
-    _textLabel.lineBreakMode = UILineBreakModeWordWrap;
+    _textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _textLabel.numberOfLines = 0;
     _textLabel.backgroundColor = [UIColor clearColor];
     _textLabel.textAlignment = UITextAlignmentCenter;

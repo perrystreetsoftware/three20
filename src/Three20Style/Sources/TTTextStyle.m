@@ -48,7 +48,7 @@
     _numberOfLines = 1;
     _textAlignment = UITextAlignmentCenter;
     _verticalAlignment = UIControlContentVerticalAlignmentCenter;
-    _lineBreakMode = UILineBreakModeTailTruncation;
+    _lineBreakMode = NSLineBreakByTruncatingTail;
   }
 
   return self;
@@ -141,7 +141,7 @@
                   shadowColor:(UIColor*)shadowColor shadowOffset:(CGSize)shadowOffset
                 textAlignment:(UITextAlignment)textAlignment
             verticalAlignment:(UIControlContentVerticalAlignment)verticalAlignment
-                lineBreakMode:(UILineBreakMode)lineBreakMode numberOfLines:(NSInteger)numberOfLines
+                lineBreakMode:(NSLineBreakMode)lineBreakMode numberOfLines:(NSInteger)numberOfLines
                          next:(TTStyle*)next {
   TTTextStyle* style = [[[self alloc] initWithNext:next] autorelease];
   style.font = font;
