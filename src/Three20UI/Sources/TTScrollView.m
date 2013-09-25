@@ -1015,7 +1015,10 @@ static const CGFloat kFrameDuration = 1.0/40.0;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (CGFloat)tween:(NSTimeInterval)t b:(NSTimeInterval)b c:(NSTimeInterval)c d:(NSTimeInterval)d {
-  return c*((t=t/d-1)*t*t + 1) + b;
+  // es added
+  // http://stackoverflow.com/questions/18729323/unsequenced-modification-and-access-to-parameter
+  t = (t=t/d-1);
+  return c*(t*t*t + 1) + b;
 }
 
 
