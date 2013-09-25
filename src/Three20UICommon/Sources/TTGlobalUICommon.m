@@ -181,3 +181,23 @@ void TTAlert(NSString* message) {
                                              otherButtonTitles:nil] autorelease];
   [alert show];
 }
+
+CGFloat TTTopInsetForOrientation(UIInterfaceOrientation orientation) {
+	if (TTIsPad()) {
+		return TT_IPAD_TOP_INSET;
+		
+	} else {
+		return UIInterfaceOrientationIsPortrait(orientation) ? TT_IPHONE_PORTRAIT_TOP_INSET
+		: TT_IPHONE_LANDSCAPE_TOP_INSET;
+	}
+}
+
+CGFloat TTBottomInsetForOrientation(UIInterfaceOrientation orientation) {
+	if (TTIsPad()) {
+		return TT_IPAD_BOTTOM_INSET;
+		
+	} else {
+		return TT_IPHONE_BOTTOM_INSET;
+	}
+}
+

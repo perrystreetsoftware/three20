@@ -87,6 +87,14 @@ CGFloat TTKeyboardHeightForOrientation(UIInterfaceOrientation orientation);
  */
 void TTAlert(NSString* message);
 
+/**
+ *
+ * es added these
+ */
+CGFloat TTTopInsetForOrientation(UIInterfaceOrientation orientation);
+CGFloat TTBottomInsetForOrientation(UIInterfaceOrientation orientation);
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Debug logging helpers
@@ -162,6 +170,13 @@ extern const CGFloat ttkGroupedTableCellInset;
 #define TT_LANDSCAPE_KEYBOARD_HEIGHT  ttkDefaultLandscapeKeyboardHeight
 #define TT_IPAD_KEYBOARD_HEIGHT            ttkDefaultPadPortraitKeyboardHeight
 #define TT_IPAD_LANDSCAPE_KEYBOARD_HEIGHT  ttkDefaultPadLandscapeKeyboardHeight
+
+#define TT_IPAD_TOP_INSET 64
+#define TT_IPAD_BOTTOM_INSET 56
+
+#define TT_IPHONE_LANDSCAPE_TOP_INSET 52
+#define TT_IPHONE_PORTRAIT_TOP_INSET 64
+#define TT_IPHONE_BOTTOM_INSET 49
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Animation
