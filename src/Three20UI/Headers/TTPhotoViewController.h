@@ -36,6 +36,7 @@
   UIView*           _innerView;
   TTScrollView*     _scrollView;
   TTPhotoView*      _photoStatusView;
+    UIImageView*      _watermarkView;
 
   UIToolbar*        _toolbar;
   UIBarButtonItem*  _nextButton;
@@ -86,6 +87,9 @@
  * The style to use for the caption label.
  */
 @property (nonatomic, retain) TTStyle* captionStyle;
+
+// es added
+@property (nonatomic, readonly) UIImageView *watermarkView;
 
 - (id)initWithPhoto:(id<TTPhoto>)photo;
 - (id)initWithPhotoSource:(id<TTPhotoSource>)photoSource;

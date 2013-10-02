@@ -178,6 +178,7 @@ extern const CGFloat ttkGroupedTableCellInset;
 #define TT_IPHONE_PORTRAIT_TOP_INSET 64
 #define TT_IPHONE_BOTTOM_INSET 49
 
+#define TT_WATERMARK_MARGIN 5
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Animation
 

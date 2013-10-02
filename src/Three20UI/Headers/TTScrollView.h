@@ -225,4 +225,6 @@
  */
 - (void)cancelTouches;
 
+- (CGRect)frameOfPageAtIndex:(NSInteger)pageIndex;
+
 @end

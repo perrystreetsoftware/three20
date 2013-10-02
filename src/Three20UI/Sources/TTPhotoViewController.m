@@ -55,7 +55,6 @@ static const NSTimeInterval kPhotoLoadShortDelay  = 0.25;
 static const NSTimeInterval kSlideshowInterval    = 2;
 static const NSInteger kActivityLabelTag          = 96;
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +65,7 @@ static const NSInteger kActivityLabelTag          = 96;
 @synthesize defaultImage      = _defaultImage;
 @synthesize captionStyle      = _captionStyle;
 @synthesize photoSource       = _photoSource;
-
+@synthesize watermarkView     = _watermarkView;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -133,7 +132,6 @@ static const NSInteger kActivityLabelTag          = 96;
   TT_RELEASE_SAFELY(_statusText);
   TT_RELEASE_SAFELY(_captionStyle);
   TT_RELEASE_SAFELY(_defaultImage);
-
   [super dealloc];
 }
 
@@ -237,13 +235,20 @@ static const NSInteger kActivityLabelTag          = 96;
   }
 	
   _toolbar.top = self.view.height - _toolbar.height - [self getAdHeight];
-
+ 
 	// es added
 	CGFloat heightChange = _toolbar.height - oldHeight;	
 	CGRect oldScrollFrame = CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height - _toolbar.height);
 
 	_scrollView.frame = CGRectMake(oldScrollFrame.origin.x, oldScrollFrame.origin.y, oldScrollFrame.size.width,
 								   oldScrollFrame.size.height - heightChange - [self getAdHeight]);
+
+    [_watermarkView sizeToFit];
+    CGRect imageFrame = [_scrollView frameOfPageAtIndex:_scrollView.centerPageIndex];
+    _watermarkView.left = ((_scrollView.width - imageFrame.size.width) / 2.0) + TT_WATERMARK_MARGIN;
+    // height - the black space - margin
+    _watermarkView.bottom = _scrollView.height - ((_scrollView.height - imageFrame.size.height) / 2.0) - TT_WATERMARK_MARGIN;
+
 }
 
 
@@ -520,6 +525,9 @@ static const NSInteger kActivityLabelTag          = 96;
   _toolbar.items = [NSArray arrayWithObjects:
                     space, _previousButton, space, _nextButton, space, nil];
   [_innerView addSubview:_toolbar];
+    
+    _watermarkView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [_innerView addSubview:_watermarkView];
 }
 
 
@@ -534,6 +542,7 @@ static const NSInteger kActivityLabelTag          = 96;
   TT_RELEASE_SAFELY(_nextButton);
   TT_RELEASE_SAFELY(_previousButton);
   TT_RELEASE_SAFELY(_toolbar);
+  TT_RELEASE_SAFELY(_watermarkView);
 }
 
 
