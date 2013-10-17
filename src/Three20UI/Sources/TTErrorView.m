@@ -114,7 +114,7 @@ static const CGFloat kHPadding  = 10;
     totalHeight += (totalHeight ? kVPadding2 : 0) + _subtitleView.height;
   }
 
-  CGFloat top = floor(self.height/2 - totalHeight/2);
+  CGFloat top = floor(self.height/2 - totalHeight/2) + 20; // es added extra 20 px padding because of iOS7 nav bar
 
   if (canShowImage) {
     _imageView.origin = CGPointMake(floor(self.width/2 - _imageView.width/2), top);
