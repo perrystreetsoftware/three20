@@ -2235,7 +2235,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -2247,6 +2247,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6EE7364B11849B3D00A35176 /* Library.xcconfig */;
 			buildSettings = {
+				ARCHS_STANDARD_32_BIT = armv7;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2254,8 +2255,10 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_THUMB_SUPPORT = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = armv7;
 			};
 			name = Internal;
 		};
@@ -2284,13 +2287,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6EE7364B11849B3D00A35176 /* Library.xcconfig */;
 			buildSettings = {
+				ARCHS_STANDARD_32_BIT = armv7;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_THUMB_SUPPORT = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -2298,11 +2304,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6EE7364B11849B3D00A35176 /* Library.xcconfig */;
 			buildSettings = {
+				ARCHS_STANDARD_32_BIT = armv7;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_THUMB_SUPPORT = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = armv7;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -2315,7 +2324,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -2331,7 +2340,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
